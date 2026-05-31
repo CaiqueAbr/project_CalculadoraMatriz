@@ -1,4 +1,4 @@
-// Guarda os valores do Form em variáveis
+// Guarda os valores do Form em variáveis.
 const formMatrizA = document.getElementById("formMatrizA");
 const selLinhaMatrizA = document.getElementById("selLinhaMatrizA");
 const selColunaMatrizA = document.getElementById("selColunaMatrizA");
@@ -6,7 +6,7 @@ const divMatrizA = document.getElementById("divMatrizA");
 
 gerarGridMatrizA()
 
-// Adiciona um evento para quando a variável que recebe o select ter o valor alterado
+// Adiciona um evento para quando a variável que recebe o select ter o valor alterado.
 selLinhaMatrizA.addEventListener("change", gerarGridMatrizA);
 selColunaMatrizA.addEventListener("change", gerarGridMatrizA);
 
@@ -40,6 +40,7 @@ let matrizBAtiva = false;
 
 btnMatrizB.addEventListener("click", toggleMatrizB);
 
+// Verifica se a matrizB já existe ou não quando clica no botão, se existir = apaga, se não, envia para a função de gerar matriz.
 function toggleMatrizB() {
     if (matrizBAtiva === false){
         matrizBAtiva = true;
@@ -54,6 +55,7 @@ function toggleMatrizB() {
 
 }
 
+//Cria os selects para as dimensões da matriz B.
 function gerarMatrizB() {
     sectionEscolhaMatrizB.innerHTML = `
     <div class="titleForm">
@@ -92,6 +94,7 @@ function gerarMatrizB() {
     gerarGridMatrizB();
 }
 
+// Cria o grid da matriz B, mesma lógica da matriz A.
 function gerarGridMatrizB() {
     const selLinhaMatrizB = document.getElementById('selLinhaMatrizB');
     const selColunaMatrizB = document.getElementById('selColunaMatrizB');
@@ -116,4 +119,82 @@ function gerarGridMatrizB() {
         divMatrizB.appendChild(divLinha);
     }
 
+}
+
+// Lê os valores de uma matriz
+function lerMatriz(prefixo, linhas, colunas) {
+    const matriz = [];
+    for (let i = 0; i < linhas; i++) {
+        const linha = []
+
+        for (let j = 0; j < colunas; j++){
+            const input = document.getElementById(`${prefixo}_${i+1}_${j+1}`);
+            const valor = parseFloat(input.value) || 0;
+            linha.push(valor);
+        }
+        matriz.push(linha);
+    }
+
+    return matriz;
+}
+
+//Cria uma lista a partir dos botões das operações
+const btnSelctOperacao = document.querySelectorAll('.btnOperacao');
+const btnCalcularOperacao = document.getElementById("btnCalcularOperacao");
+let operacaoSelecionada = null;
+
+//Percorre todos os botões, e adiciona um evento para quando algum deles for clicado, assim aparece o botão de calcular, e salva o ID do último botão clicado, para sabermos qual operação fazer.
+btnSelctOperacao.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        operacaoSelecionada = btn.id;
+        btnCalcularOperacao.style.display = 'block'
+        
+        btnSelctOperacao.forEach(function(b) {
+            b.classList.remove('btnOperacaoAtivo');
+        })
+        btn.classList.add('btnOperacaoAtivo');
+    })
+})
+
+//Verifica operação escolhida e envia para a função que calcula tal operaçao.
+btnCalcularOperacao.addEventListener('click', verificarOperacao);
+function verificarOperacao() {
+
+    if (operacaoSelecionada === 'btnTransposta'){
+        calcularTransposta();
+    }
+    else if (operacaoSelecionada === 'btnProdutoAAT') {
+        calcularProdutoAAT();
+    }
+    else if (operacaoSelecionada === 'btnProdutoAtA') {
+        calcularProdutoAtA();
+    }
+    else if (operacaoSelecionada === 'btnMultEscalar'){
+        calcularMultEscalar();
+    }
+    else if (operacaoSelecionada === 'btnDeterminante'){
+        calcularDeterminante();
+    }
+    else if (operacaoSelecionada === 'btnInversa'){
+        calcularInversa();
+    }
+}
+
+function calcularTransposta() {
+    const linhas = parseInt(selLinhaMatrizA.value);
+    const colunas = parseInt(selColunaMatrizA.value);
+    const matrizA = lerMatriz('A', linhas, colunas);
+
+    const transposta = [];
+
+    for (let i = 0; i < colunas; i++) {
+        const linha = [];
+        
+        for (let j = 0; j < linhas; j++) {
+            linha.push(matrizA[j][i])
+        }
+
+        transposta.push(linha)
+    }
+    console.log(transposta);
 }
