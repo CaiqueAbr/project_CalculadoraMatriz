@@ -41,7 +41,7 @@ main
 {
     margin: 1rem;
     
-    section#sectionEscolha
+    section#sectionEscolhaMatrizA, section#sectionEscolhaMatrizB
     {
         .titleForm
         {
@@ -63,7 +63,27 @@ main
                 border: none;
             }
         }
-        form#formMatrizA
+        .divSelects
+        {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            color: rgb(46, 46, 46);
+            font-size: 11px;
+            align-items: center;
+            
+            select 
+            {
+                background-color: rgb(19, 19, 19);
+                text-align: center;
+                width: 3.2rem;
+                height: 1.6rem;
+                font-size: 10px;
+                color: white;
+                border-color: rgb(35, 35, 35);
+            }
+        }
+        form#formMatrizA, form#formMatrizB
         {
             padding: 1rem 0rem 1rem 0rem;
             .divSelects
@@ -87,7 +107,7 @@ main
                 
                 
             }
-            #divMatrizA
+            #divMatrizA, #divMatrizB
             {
                 display: flex;
                 flex-direction: column;
@@ -113,6 +133,24 @@ main
             }
         }
         
+        
+    }
+    #btnMatrizB 
+    {
+        margin-bottom: 1rem;
+        width: 9.8rem;
+        letter-spacing: 0.09rem;
+        height: 1.7rem;
+        font-size: 0.6rem;
+        background-color: rgb(13, 13, 13);
+        border: 1px solid rgb(35, 35, 35);
+        color: rgb(43, 43, 43);
+        transition: 0.3s ease;
+
+        &:hover {
+            transform: scale(1.03);
+            color: rgb(223, 223, 223);
+        }
     }
 }
 input[type="number"]::-webkit-inner-spin-button,
