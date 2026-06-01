@@ -26,6 +26,7 @@ function gerarGridMatrizA() {
             input.id = `A_${i+1}_${j+1}`;
             input.className = 'inputCriarMatriz'
             input.placeholder = `A${i+1}${j+1}`
+            input.max = 1000
             divLinha.appendChild(input);
         }
 
@@ -159,6 +160,8 @@ btnSelctOperacao.forEach(function(btn) {
 //Verifica operação escolhida e envia para a função que calcula tal operaçao.
 btnCalcularOperacao.addEventListener('click', verificarOperacao);
 function verificarOperacao() {
+
+    console.log('A', selLinhaMatrizA.value, selColunaMatrizA.value)
 
     if (operacaoSelecionada === 'btnTransposta'){
         calcularTransposta();
