@@ -155,6 +155,39 @@ main
     }
     section#sectionOperacao
     {
+        div#divInputEscalar 
+        {
+            color: rgb(0, 255, 38);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+
+            #inputEscalar
+            {
+
+                padding: 0.5rem;
+                margin-top: 0.5rem;
+                width: 10rem;
+                letter-spacing: 0.09rem;
+                height: 1.7rem;
+                font-size: 0.7rem;
+                background-color: rgb(13, 13, 13);
+                border: 1px solid rgb(35, 35, 35);
+                color: rgb(208, 208, 208);
+                transition: 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.015);
+                    border-color: rgb(134, 134, 134);
+                }
+            }
+            hr {
+                height: 1px;
+                width: 18rem;
+                background-color: rgb(46, 46, 46);
+                border: none;
+            }
+            
+        }
         .titleOperacao
         {
             display: flex;
@@ -191,7 +224,7 @@ main
                 font-size: 0.7rem;
                 background-color: rgb(13, 13, 13);
                 border: 1px solid rgb(35, 35, 35);
-                color: rgb(43, 43, 43);
+                color: rgb(96, 96, 96);
                 transition: 0.3s ease;
 
                 &:hover {
