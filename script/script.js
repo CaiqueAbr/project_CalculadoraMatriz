@@ -235,18 +235,31 @@ function verificarOperacao() {
         }
     }
 }
-function calcularTransposta() {
-    const linhas = parseInt(selLinhaMatrizA.value);
-    const colunas = parseInt(selColunaMatrizA.value);
-    const matrizA = lerMatriz('A', linhas, colunas);
+function getDimensoes() {
+    const linhasA = parseInt(selLinhaMatrizA.value);
+    const colunasA = parseInt(selColunaMatrizA.value);
+    
+    let linhasB = 0;
+    let colunasB = 0;
+    
+    if (matrizBAtiva) {
+        linhasB = parseInt(document.getElementById('selLinhaMatrizB').value);
+        colunasB = parseInt(document.getElementById('selColunaMatrizB').value);
+    }
+    
+    return { linhasA, colunasA, linhasB, colunasB };
+}
 
+function calcularTransposta() {
+    const { linhasA, colunasA} = getDimensoes();
+    const MatrizA = lerMatriz('A', linhasA, colunasA);
     const transposta = [];
 
-    for (let i = 0; i < colunas; i++) {
+    for (let i = 0; i < colunasA; i++) {
         const linha = [];
         
-        for (let j = 0; j < linhas; j++) {
-            linha.push(matrizA[j][i])
+        for (let j = 0; j < linhasA; j++) {
+            linha.push(MatrizA[j][i])
         }
 
         transposta.push(linha)
@@ -256,20 +269,19 @@ function calcularTransposta() {
     return transposta;
 }
 function calcularProdutoAAT() {
-    console.log('entrou na função!') // adiciona essa linha
-    const linhas = parseInt(selLinhaMatrizA.value);
-    const colunas = parseInt(selColunaMatrizA.value);
-    const matrizA = lerMatriz('A', linhas, colunas);
+    const { linhasA, colunasA} = getDimensoes();
+    const MatrizA = lerMatriz('A', linhasA, colunasA);
+
     const transposta = calcularTransposta();
     const matrizAAT = [];
     
-    for (let i = 0; i < linhas; i++){
+    for (let i = 0; i < linhasA; i++){
         const linha = [];
-        for (let j = 0; j < linhas; j++){
+        for (let j = 0; j < linhasA; j++){
             let soma = 0;
 
-            for (let k = 0; k < colunas; k++){
-                soma += matrizA[i][k] * transposta[k][j]
+            for (let k = 0; k < colunasA; k++){
+                soma += MatrizA[i][k] * transposta[k][j]
             }
             linha.push(soma);
         }
@@ -280,21 +292,19 @@ function calcularProdutoAAT() {
     return matrizAAT;
 }
 function calcularProdutoAtA() {
+    const { linhasA, colunasA } = getDimensoes();
+    const MatrizA = lerMatriz('A', linhasA, colunasA);
 
-    console.log('produto ata')
-    const linhas = parseInt(selLinhaMatrizA.value);
-    const colunas = parseInt(selColunaMatrizA.value);
-    const matrizA = lerMatriz('A', linhas, colunas);
     const transposta = calcularTransposta();
     const matrizAtA = [];
     
-    for (let i = 0; i < colunas; i++){
+    for (let i = 0; i < colunasA; i++){
         const linha = [];
-        for (let j = 0; j < colunas; j++){
+        for (let j = 0; j < colunasA; j++){
             let soma = 0;
 
-            for (let k = 0; k < linhas; k++){
-                soma += transposta[i][k] * matrizA[k][j]
+            for (let k = 0; k < linhasA; k++){
+                soma += transposta[i][k] * MatrizA[k][j]
             }
             linha.push(soma);
         }
@@ -305,18 +315,17 @@ function calcularProdutoAtA() {
     return matrizAtA;
 }
 function calcularMultEscalar() {
-    console.log("multescalar");
-    const linhas = parseInt(selLinhaMatrizA.value);
-    const colunas = parseInt(selColunaMatrizA.value);
-    const matrizA = lerMatriz('A', linhas, colunas);
+    const { linhasA, colunasA} = getDimensoes();
+    const MatrizA = lerMatriz('A', linhasA, colunasA);
+
     const valorK = document.getElementById('inputEscalar').value;
     const matrizMultEscalar = [];
 
-    for (let i = 0; i < linhas; i++){
+    for (let i = 0; i < linhasA; i++){
         const linha = [];
         let mult = 0;
-        for (let j = 0; j < colunas; j++){
-            mult = matrizA[i][j] * valorK;
+        for (let j = 0; j < colunasA; j++){
+            mult = MatrizA[i][j] * valorK;
             linha.push(mult);
         } 
         matrizMultEscalar.push(linha)
@@ -326,16 +335,10 @@ function calcularMultEscalar() {
     return matrizMultEscalar;
 }
 function calcularAdicao() {
-    const linhasA = parseInt(selLinhaMatrizA.value);
-    const colunasA = parseInt(selColunaMatrizA.value);
-    
-    const selLinhaMatrizB = document.getElementById('selLinhaMatrizB');
-    const selColunaMatrizB = document.getElementById('selColunaMatrizB');
-    const linhasB = parseInt(selLinhaMatrizB.value);
-    const colunasB = parseInt(selColunaMatrizB.value);
-
+    const { linhasA, colunasA, linhasB, colunasB } = getDimensoes();
     const MatrizA = lerMatriz('A', linhasA, colunasA);
     const MatrizB = lerMatriz('B', linhasB, colunasB);
+
     const matrizSoma = []
 
     console.log(linhasA, linhasB, colunasA, colunasB)
@@ -350,22 +353,17 @@ function calcularAdicao() {
             matrizSoma.push(linha);
         }
         console.log(matrizSoma);
+        return(matrizSoma);
     }
     else {
         alert('As matrizes devem ser da mesma dimensão');
     }
 }
 function calcularSubtracao() {
-    const linhasA = parseInt(selLinhaMatrizA.value);
-    const colunasA = parseInt(selColunaMatrizA.value);
-    
-    const selLinhaMatrizB = document.getElementById('selLinhaMatrizB');
-    const selColunaMatrizB = document.getElementById('selColunaMatrizB');
-    const linhasB = parseInt(selLinhaMatrizB.value);
-    const colunasB = parseInt(selColunaMatrizB.value);
-
+    const { linhasA, colunasA, linhasB, colunasB } = getDimensoes();
     const MatrizA = lerMatriz('A', linhasA, colunasA);
     const MatrizB = lerMatriz('B', linhasB, colunasB);
+
     const matrizSubtracao = []
 
     console.log(linhasA, linhasB, colunasA, colunasB)
@@ -380,22 +378,17 @@ function calcularSubtracao() {
             matrizSubtracao.push(linha);
         }
         console.log(matrizSubtracao);
+        return(matrizSubtracao)
     }
     else {
         alert('As matrizes devem ser da mesma dimensão');
     }
 }
 function calcularMultiplicacaoAB() {
-    const linhasA = parseInt(selLinhaMatrizA.value);
-    const colunasA = parseInt(selColunaMatrizA.value);
-    
-    const selLinhaMatrizB = document.getElementById('selLinhaMatrizB');
-    const selColunaMatrizB = document.getElementById('selColunaMatrizB');
-    const linhasB = parseInt(selLinhaMatrizB.value);
-    const colunasB = parseInt(selColunaMatrizB.value);
-
+    const { linhasA, colunasA, linhasB, colunasB } = getDimensoes();
     const MatrizA = lerMatriz('A', linhasA, colunasA);
     const MatrizB = lerMatriz('B', linhasB, colunasB);
+
     const matrizMultAB = []
 
     console.log(linhasA, linhasB, colunasA, colunasB)
@@ -413,22 +406,17 @@ function calcularMultiplicacaoAB() {
         matrizMultAB.push(linha)
     }
         console.log(matrizMultAB);
+        return(matrizMultAB)
     }
     else {
         alert('As colunas da MatrizA devem ter dimensão igual as dimensões da linhas da MatrizB');
     }
 }
 function calcularMultiplicacaoBA() {
-    const linhasA = parseInt(selLinhaMatrizA.value);
-    const colunasA = parseInt(selColunaMatrizA.value);
-    
-    const selLinhaMatrizB = document.getElementById('selLinhaMatrizB');
-    const selColunaMatrizB = document.getElementById('selColunaMatrizB');
-    const linhasB = parseInt(selLinhaMatrizB.value);
-    const colunasB = parseInt(selColunaMatrizB.value);
-
+    const { linhasA, colunasA, linhasB, colunasB } = getDimensoes();
     const MatrizA = lerMatriz('A', linhasA, colunasA);
     const MatrizB = lerMatriz('B', linhasB, colunasB);
+
     const matrizMultBA = []
 
     console.log(linhasA, linhasB, colunasA, colunasB)
@@ -446,21 +434,29 @@ function calcularMultiplicacaoBA() {
         matrizMultBA.push(linha)
     }
         console.log(matrizMultBA);
+        return(matrizMultBA)
     }
     else {
         alert('As colunas da MatrizB devem ter dimensão igual as dimensões da linhas da MatrizA');
     }
 }
 function calcularDeterminante() {
-    const linhas = parseInt(selLinhaMatrizA.value);
-    const colunas = parseInt(selColunaMatrizA.value);
-    const matriz = lerMatriz('A', linhas, colunas)
+    const { linhasA, colunasA} = getDimensoes();
+    const MatrizA = lerMatriz('A', linhasA, colunasA);
+
     let det = 0;
 
-    if (linhas === colunas){
-        if (linhas === 2 && colunas === 2){
-            det = matriz[0][0] * matriz[1][1] - matriz[0][1] * matriz[1][0];
+    if (linhasA === colunasA){
+        if (linhasA === 1 && colunasA === 1){
+            det = MatrizA[0][0];
             console.log(det);
+        }
+        else if (linhasA === 2 && colunasA === 2){
+            det = MatrizA[0][0] * MatrizA[1][1] - MatrizA[0][1] * MatrizA[1][0];
+            console.log(det);
+        }
+        else {
+
         }
     }
     else {
