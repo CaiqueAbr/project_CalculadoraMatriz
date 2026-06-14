@@ -12,60 +12,68 @@
         <p id="subtitle">calculadora de matrizes · passo a passo</p>
     </header>
     <main>
-        <section id="sectionEscolhaMatrizA">
-            <div class="titleForm">
-                <p>MATRIZ A</p><hr>
-            </div>
-            <form action="" id="formMatrizA">
-                <div class="divSelects">
-                    <select name="selLinhaMatrizA" id="selLinhaMatrizA">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3" selected>3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                    <p>x</p>
-                    <select name="selColunaMatrizA" id="selColunaMatrizA">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3" selected>3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
+        <div class="colunaEsquerda">
+            <section id="sectionEscolhaMatrizA">
+                <div class="titleForm">
+                    <p>MATRIZ A</p><hr>
                 </div>
-                <div id="divMatrizA">
+                <form action="" id="formMatrizA">
+                    <div class="divSelects">
+                        <select name="selLinhaMatrizA" id="selLinhaMatrizA">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                        <p>x</p>
+                        <select name="selColunaMatrizA" id="selColunaMatrizA">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3" selected>3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    <div id="divMatrizA">
+                    </div>
+                </form>
+            </section>
+            <button id="btnMatrizB">+ ADICIONAR MATRIZ B</button>
+            <section id="sectionEscolhaMatrizB">
+            </section>
+            <section id="sectionOperacao">
+                <div id="divInputEscalar" style="display:none">
+                    <p>DIGITE O VALOR DE K:</p>
+                    <input type="number" id="inputEscalar" placeholder="K">
                 </div>
-            </form>
-        </section>
-
-        <button id="btnMatrizB">+ ADICIONAR MATRIZ B</button>    
-        <section id="sectionEscolhaMatrizB">
-        </section>
-
-        <section id="sectionOperacao">
-            <div id="divInputEscalar" style="display:none">
-                <p>DIGITE O VALOR DE K:</p>
-                <input type="number" id="inputEscalar" placeholder="K">
-            </div>
+                <div class="titleOperacao">
+                    <p>OPERAÇÃO </p><hr>
+                </div>
+                <div id="divOperacoes">
+                    <button class="btnOperacao" id="btnTransposta">Transposta — Aᵀ</button>
+                    <button class="btnOperacao" id="btnProdutoAAt">Produto — A x Aᵀ</button>
+                    <button class="btnOperacao" id="btnProdutoAtA">Produto — Aᵀ x A</button>
+                    <button class="btnOperacao" id="btnMultEscalar">Mult. Escalar — k·A</button>
+                    <button class="btnOperacao" id="btnDeterminante">Determinante — det(A)</button>
+                    <button class="btnOperacao" id="btnInversa">Inversa — A⁻¹</button>
+                    <button class="btnOperacao" id="btnAdicao" style="display:none">Adição — A + B</button>
+                    <button class="btnOperacao" id="btnSubtracao" style="display:none">Subtração — A - B</button>
+                    <button class="btnOperacao" id="btnMultiplicacaoAB" style="display:none">Multiplicação — A x B</button>
+                    <button class="btnOperacao" id="btnMultiplicacaoBA" style="display:none">Multiplicação — B x A</button>
+                </div>
+                <button id="btnCalcularOperacao">Calcular</button>
+            </section>
+        </div>
+        <section id="sectionResultado" style="display:none" >
             <div class="titleOperacao">
-                <p>OPERAÇÃO </p><hr>
+                <p>RESULTADO</p><hr>
             </div>
-            <div id="divOperacoes">
-                <button class="btnOperacao" id="btnTransposta">Transposta — Aᵀ</button>
-                <button class="btnOperacao" id="btnProdutoAAt">Produto — A x Aᵀ</button>
-                <button class="btnOperacao" id="btnProdutoAtA">Produto — Aᵀ x A</button>
-                <button class="btnOperacao" id="btnMultEscalar">Mult. Escalar — k·A</button>
-                <button class="btnOperacao" id="btnDeterminante">Determinante — det(A)</button>
-                <button class="btnOperacao" id="btnInversa">Inversa — A⁻¹</button>
-                <button class="btnOperacao" id="btnAdicao" style="display:none">Adição — A + B</button>
-                <button class="btnOperacao" id="btnSubtracao" style="display:none">Subtração — A - B</button>
-                <button class="btnOperacao" id="btnMultiplicacaoAB" style="display:none">Multiplicação — A x B</button>
-                <button class="btnOperacao" id="btnMultiplicacaoBA" style="display:none">Multiplicação — B x A</button>
-            </div>
-            <button id="btnCalcularOperacao">Calcular</button>
+            <div id="divPassoAPasso"></div>
+            <div id="divResultadoFinal"></div>
+            <button id="btnExportar" style="display:none">EXPORTAR .TXT</button>
         </section>
     </main>
     <script src="script/script.js"></script>

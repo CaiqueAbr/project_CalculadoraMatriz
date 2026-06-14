@@ -40,7 +40,14 @@ header
 main 
 {
     margin: 1rem;
-    
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+
+    #colunaEsquerda
+    {
+        flex-shrink: 0;
+    }
     section#sectionEscolhaMatrizA, section#sectionEscolhaMatrizB
     {
         .titleForm
@@ -265,6 +272,86 @@ main
 
         }
     }
+    section#sectionResultado
+{
+    margin-top: 0;
+    flex: 1;
+    position: sticky;
+    top: 1rem;
+
+    .titleOperacao
+    {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+
+        p
+        {
+            color: rgb(0, 255, 38);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+        }
+        hr
+        {
+            height: 1px;
+            width: 18rem;
+            background-color: rgb(46, 46, 46);
+            border: none;
+        }
+    }
+
+    #divPassoAPasso, #divResultadoFinal
+    {
+        background-color: rgb(13, 13, 13);
+        border: 1px solid rgb(35, 35, 35);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        color: rgb(208, 208, 208);
+        font-size: 0.8rem;
+
+        h3
+        {
+            color: rgb(0, 255, 38);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+        }
+
+        p
+        {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        pre
+        {
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: rgb(82, 255, 108);
+            white-space: pre-wrap;
+        }
+    }
+
+    #btnExportar
+    {
+        display: none;
+        width: 24rem;
+        height: 2rem;
+        background-color: rgb(13, 13, 13);
+        border: 1px solid rgb(35, 35, 35);
+        color: rgb(96, 96, 96);
+        font-size: 0.8rem;
+        letter-spacing: 0.09rem;
+        transition: 0.3s ease;
+
+        &:hover {
+            transform: scale(1.015);
+            color: rgb(82, 255, 108);
+            border-color: rgb(0, 255, 38);
+        }
+    }
+}
 }
 
 
